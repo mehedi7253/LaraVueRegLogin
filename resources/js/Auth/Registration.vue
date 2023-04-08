@@ -5,7 +5,7 @@
                 <h3 class="text-center">Registration</h3>
             </div>
             <div class="card-body">
-                <form @submit.prevent="register" method="POST">
+                <form @submit.prevent="register" ref="form_1" method="POST">
                     <div class="form-group">
                         <label>Name</label>
                         <input type="text" class="form-control" placeholder="Enter Name" v-model="reg.name">
@@ -55,7 +55,12 @@
             register(){
                 axios.post('/api/auth/register', this.reg)
                 .then((response) => {
-                    console.log('Successfull')
+                    window.setTimeout(function () {
+                        window.location.reload();
+                    }, 1000);
+                    this.$router.back();
+                    this.$refs.form_1.reset();
+
                 }).catch(error => {
                     if(error.response.status == 400) {
                     this.errors = error.response.data;
