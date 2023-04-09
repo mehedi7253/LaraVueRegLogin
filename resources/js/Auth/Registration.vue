@@ -46,15 +46,22 @@
                     name: "",
                     email: "",
                     password: "",
+                    is_customer:"1"
                 },
                 errors: {},
             }
         },
-
+        mounted() {
+            if (User.isLoggedIn()) {
+                this.$router.push({ name: 'UserProfile' });
+            }
+        },
         methods: {
             register(){
                 axios.post('/api/auth/register', this.reg)
                 .then((response) => {
+                    User.responseAfterLogin(response)
+                    this.$router.back();
                     window.setTimeout(function () {
                         window.location.reload();
                     }, 1000);
