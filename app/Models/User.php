@@ -55,4 +55,9 @@ class User extends Authenticatable implements JWTSubject
      * @var array<string, string>
      */
 
+    public function books()
+    {
+      return $this->hasMany(Book::class);
+    }
+
 }

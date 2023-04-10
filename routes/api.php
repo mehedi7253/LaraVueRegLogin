@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-
+use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,6 @@ Route::group(['middleware' => 'api', 'prefix' => '/auth'], function ($router) {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/profile', [AuthController::class, 'userProfile']);
 
+    Route::get('/book', [BookController::class, 'index']);
+    Route::post('/rate', [RatingController::class, 'store']);
 });
